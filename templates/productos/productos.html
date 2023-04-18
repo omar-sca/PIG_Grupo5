@@ -5,22 +5,7 @@
 {% block contenido %}
 
 <div id="tb_quizlist_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-    <!--div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_length" id="tb_quizlist_length"><label>Mostrar <select name="tb_quizlist_length"
-                        aria-controls="tb_quizlist" class="custom-select custom-select-sm form-control form-control-sm">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select> filas</label></div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div id="tb_quizlist_filter" class="dataTables_filter"><label>Search:<input type="search"
-                        class="form-control form-control-sm" placeholder="" aria-controls="tb_quizlist"></label>
-            </div>
-        </div>
-    </div-->
+    
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-bordered mb-0 dataTable no-footer" id="tb_quizlist" role="grid"
@@ -35,8 +20,6 @@
                         <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
                             rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
                             </th>
-                        
-
                     </tr>
                 </thead>
                 <tbody>
@@ -55,39 +38,6 @@
             </table>
         </div>
     </div>
-
-    <!--div class="row">
-        <div class="col-sm-12 col-md-5">
-            <div class="dataTables_info" id="tb_quizlist_info" role="status" aria-live="polite">Mostrando 1 a 10
-                de {{cant_prod}} productos</div>
-        </div>
-        <div class="col-sm-12 col-md-7">
-            <div class="dataTables_paginate paging_simple_numbers" id="tb_quizlist_paginate">
-                <ul class="pagination">
-                    <li class="paginate_button page-item previous disabled" id="tb_quizlist_previous"><a href="#"
-                            aria-controls="tb_quizlist" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                    <li class="paginate_button page-item active"><a href="#" aria-controls="tb_quizlist" data-dt-idx="1"
-                            tabindex="0" class="page-link">1</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="tb_quizlist" data-dt-idx="2"
-                            tabindex="0" class="page-link">2</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="tb_quizlist" data-dt-idx="3"
-                            tabindex="0" class="page-link">3</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="tb_quizlist" data-dt-idx="4"
-                            tabindex="0" class="page-link">4</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="tb_quizlist" data-dt-idx="5"
-                            tabindex="0" class="page-link">5</a></li>
-                    <li class="paginate_button page-item disabled" id="tb_quizlist_ellipsis"><a href="#"
-                            aria-controls="tb_quizlist" data-dt-idx="6" tabindex="0" class="page-link">…</a>
-                    </li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="tb_quizlist" data-dt-idx="7"
-                            tabindex="0" class="page-link">14</a></li>
-                    <li class="paginate_button page-item next" id="tb_quizlist_next"><a href="#"
-                            aria-controls="tb_quizlist" data-dt-idx="8" tabindex="0" class="page-link">Next</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div-->
 </div>
 
 {% load static %}
