@@ -1,0 +1,32 @@
+    footer{
+        bottom: 0px;
+        text-align: center;
+    /*  background-image: linear-gradient(seagreen,darkgreen);*/
+        color: black;
+        color: whitesmoke;
+        padding-top: 2%;
+    }
+    
+    .paddingIconoFooter{
+        padding-left: 0.45vw;
+        padding-right: 0.45vw;
+    }
+
+    .nav-superior {
+        /*padding-left: 1vw;
+        padding-right: 1vw;*/
+        margin-left: 1vw;
+        margin-right: 1vw;
+        font-weight: bold;
+
+    }
+
+    .nav-superior:hover{
+        color: white;
+    }
+    
+    .img-edit{
+        width:1.5vw
+    }
+
+   
