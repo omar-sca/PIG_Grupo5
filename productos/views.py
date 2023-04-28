@@ -6,8 +6,18 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-listaProductos=[('prod A',32),('prod B',0),('prod C',5),('prod D',65),('prod E',9),('prod A',32),('prod B',0),('prod C',5),('prod D',65),('prod E',9),('prod A',32),('prod B',0),('prod C',5),('prod D',65),('prod E',9)]
-
+listaProductos=[
+    (1,'prod A','fabricante1',32),
+    (2,'prod B','fabricante1',0),
+    (3,'prod C','fabricante1',5),
+    (4,'prod D','fabricante1',65),
+    (5,'prod E','fabricante1',9),
+    (6,'prod A','fabricante1',32),
+    (7,'prod B','fabricante1',0),
+    (8,'prod C','fabricante1',5),
+    (9,'prod D','fabricante1',65),
+    (10,'prod E','fabricante1',9),
+    ]
 
 def mostrar(request):
     template = loader.get_template('productos/productos.html')
