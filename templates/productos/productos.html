@@ -44,10 +44,10 @@
                     <h1>Productos:</h1>
                     {% for e in productos %}
                     <tr role="row">
-                        <td class="align-middle">{{e.0}}</td>
-                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.1}}</td>
+                        <td class="align-middle">{{e.1}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.3}}</td>
                         {% load static %}
-                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href=""><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar' e.0 %}"><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
                     </tr>
                     {% endfor %}
 
