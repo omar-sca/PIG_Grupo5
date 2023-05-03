@@ -1,4 +1,5 @@
 from django import forms
+import datetime
 
 class ModificarStockForm(forms.Form):
     TIPO_COMPROBANTE = (
@@ -11,6 +12,7 @@ class ModificarStockForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     numero_comprobante = forms.CharField (label="Numero de comprobante", required=True)
+    fecha_comprobante = forms.DateField(initial=datetime.date.today, label="Fecha de comprobante", required=True)
 
 
 class IngresarProductoForm(forms.Form):
