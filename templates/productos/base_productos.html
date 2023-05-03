@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block body %} 
@@ -13,10 +14,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="/productos/nuevo">Nuevo producto</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/productos/fabricantes">Fabricantes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/productos/facturas">Ver Facturas</a>
+            </li>
         </ul>
 
         {% block contenido %} {% endblock contenido %}
     </div>
-
 
 {% endblock body %}
