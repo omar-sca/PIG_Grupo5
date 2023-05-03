@@ -1,3 +1,4 @@
+
 {% extends 'productos\base_productos.html' %}
 
 {% block titulo %}Stock de Productos{% endblock titulo %}
@@ -29,14 +30,14 @@
                     <tr role="row">
                         <th class="sorting" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
                             aria-label="" style="width: 20vw;">Producto</th>
+                        <th class="sorting" tabindex="0" aria-controls="tb_quizlist" rowspan="1" colspan="1"
+                            aria-label="" style="width: 20vw;">Fabricante</th>
                         <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
                             rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
                             Stock</th>
                         <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
                             rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
                             </th>
-                        
-
                     </tr>
                 </thead>
                 <tbody>
@@ -45,9 +46,10 @@
                     {% for e in productos %}
                     <tr role="row">
                         <td class="align-middle">{{e.1}}</td>
+                        <td class="align-middle">{{e.2}}</td>
                         <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.3}}</td>
                         {% load static %}
-                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar' e.0 %}"><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar_producto' e.0 %}"><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
                     </tr>
                     {% endfor %}
 
