@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 
 # Create your views here.
-
+#Tupla producto: (id_producto, nombre, fabricante, stock)
 listaProductos=[
     (1,'prod A','fabricante1',32),
     (2,'prod B','fabricante1',0),
@@ -19,16 +19,46 @@ listaProductos=[
     (10,'prod E','fabricante1',9),
     ]
 
-def mostrar(request):
+#Tupla fabricante: (id_fabricante, nombre, direccion,telefono, mail)
+listaFabricantes=[
+    (1,'fabricante1', "calle1", '4900-0000', 'mail@mail.com'),
+    (2,'fabricante2', "calle1", '4900-0000', 'mail@mail.com'),
+    (3,'fabricante3', "calle1", '4900-0000', 'mail@mail.com'),
+    (4,'fabricante4', "calle1", '4900-0000', 'mail@mail.com'),
+    ]
+
+
+def productos_mostrar(request):
     template = loader.get_template('productos/productos.html')
     context={'productos':listaProductos}
     return HttpResponse(template.render(context,request))
 
-def nuevo_producto(request):
-    #template = loader.get_template('productos/nuevo.html')
+def producto_nuevo(request):
+    #template = loader.get_template('productos/producto_nuevo.html')
     #context={'':}
     #return HttpResponse(template.render(context,request))
-    return render(request,'productos/nuevo.html')
+    return render(request,'productos/producto_nuevo.html')
+
+def producto_editar(request,id_prod):
+    template = loader.get_template('productos/producto_editar.html')
+    context={'id_item':id_prod}
+    return HttpResponse(template.render(context,request))
+
+def fabricantes_mostrar(request):
+    template = loader.get_template('productos/fabricantes.html')
+    context={'fabricantes':listaFabricantes}
+    return HttpResponse(template.render(context,request))
+    
+def fabricante_editar(request,id_fabr):
+    template = loader.get_template('productos/fabricante_editar.html')
+    context={'id_fabricante':id_fabr}
+    return HttpResponse(template.render(context,request))
+
+def fabricante_nuevo(request):
+    #template = loader.get_template('productos/fabricante_nuevo.html')
+    #context={'':}
+    #return HttpResponse(template.render(context,request))
+    return render(request,'productos/fabricante_nuevo.html')
 
 def stock(request):
     #template = loader.get_template('productos/modificar_stock.html')
@@ -36,8 +66,8 @@ def stock(request):
     #return HttpResponse(template.render(context,request))
     return render(request,'productos/modificar_stock.html')
 
-def editar(request,id_prod):
-    template = loader.get_template('productos/editar.html')
-    context={'id_item':id_prod}
-    return HttpResponse(template.render(context,request))
-
+def ver_facturas(request):
+    #template = loader.get_template('productos/facturas.html')
+    #context={'':}
+    #return HttpResponse(template.render(context,request))
+    return render(request,'productos/facturas.html')
