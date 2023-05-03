@@ -2,6 +2,8 @@ from re import template
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
+from productos.forms import IngresarProductoForm, ModificarStockForm
+
 
 
 # Create your views here.
@@ -34,10 +36,10 @@ def productos_mostrar(request):
     return HttpResponse(template.render(context,request))
 
 def producto_nuevo(request):
-    #template = loader.get_template('productos/producto_nuevo.html')
-    #context={'':}
-    #return HttpResponse(template.render(context,request))
-    return render(request,'productos/producto_nuevo.html')
+    template = loader.get_template('productos/producto_nuevo.html')
+    context={'IngresarProductoForm':IngresarProductoForm}
+    return HttpResponse(template.render(context,request))
+    #return render(request,'productos/producto_nuevo.html')
 
 def producto_editar(request,id_prod):
     template = loader.get_template('productos/producto_editar.html')
@@ -61,10 +63,13 @@ def fabricante_nuevo(request):
     return render(request,'productos/fabricante_nuevo.html')
 
 def stock(request):
+    template = loader.get_template('productos/modificar_stock.html')
+    context={'ModificarStockForm':ModificarStockForm}
+    return HttpResponse(template.render(context,request))
     #template = loader.get_template('productos/modificar_stock.html')
     #context={'':}
     #return HttpResponse(template.render(context,request))
-    return render(request,'productos/modificar_stock.html')
+    #return render(request,'productos/modificar_stock.html')
 
 def ver_facturas(request):
     #template = loader.get_template('productos/facturas.html')

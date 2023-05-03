@@ -4,6 +4,12 @@
 {% block titulo %}Nuevo producto{% endblock titulo %}
 
 {% block contenido %}
+<div class="text-center">
 <h1>Agregar nuevos productos</h1>
-
+<form action="{% url 'nuevo_producto' %}" method="POST">
+    {% csrf_token %}
+    {{ IngresarProductoForm.as_p }}
+    <button type="submit">Guardar</button>
+<form>
+</div>
 {% endblock contenido %}

@@ -3,13 +3,11 @@ from productos import views
 
 urlpatterns = [
     path('', views.productos_mostrar),
-    path('nuevo/', views.producto_nuevo),
+    path('nuevo/', views.producto_nuevo, name='nuevo_producto'),
     path('editar/<int:id_prod>/', views.producto_editar, name='editar_producto'),
-    
     path('fabricantes/', views.fabricantes_mostrar),
     path('fabricantes/nuevo/', views.fabricante_nuevo),
     path('fabricantes/editar/<int:id_fabr>', views.fabricante_editar, name='editar_fabricante'),
-
-    path('modificar_stock/', views.stock),
+    path('modificar_stock/', views.stock, name='modificar_stock'),
     path('facturas/', views.ver_facturas),
 ]
