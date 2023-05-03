@@ -29,4 +29,8 @@
         width:1.5vw
     }
 
+    .link-right {
+        position: relative;
+        text-align: right;
+    }
    
