@@ -6,6 +6,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 
+def inicio_sesion(request):
+    return render(request,"usuarios/inicio_sesion.html")
 
 def mostrar(request):
     return render(request,"usuarios/base_usuarios.html")
