@@ -2,7 +2,8 @@ from re import template
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-from productos.forms import IngresarProductoForm, ModificarStockForm
+from productos.forms import IngresarProductoForm, ModificarStockForm,NuevoFabricanteForm
+from django.contrib import messages
 
 
 
@@ -57,10 +58,18 @@ def fabricante_editar(request,id_fabr):
     return HttpResponse(template.render(context,request))
 
 def fabricante_nuevo(request):
-    #template = loader.get_template('productos/fabricante_nuevo.html')
-    #context={'':}
-    #return HttpResponse(template.render(context,request))
-    return render(request,'productos/fabricante_nuevo.html')
+    if request.method =='POST':
+        form_nuevo_prod=NuevoFabricanteForm(request.POST)
+        if form_nuevo_prod.is_valid():
+            messages.success(request, 'Nuevo fabricante agregado')
+        else:
+            messages.warning(request, 'Error en los datos del formulario')
+    elif request.method=='GET':
+        form_nuevo_prod = NuevoFabricanteForm()
+
+    template = loader.get_template('productos/fabricante_nuevo.html')
+    context={'form_nuevo_producto':form_nuevo_prod}
+    return HttpResponse(template.render(context,request))
 
 def stock(request):
     template = loader.get_template('productos/modificar_stock.html')
