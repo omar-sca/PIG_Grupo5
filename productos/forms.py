@@ -1,5 +1,6 @@
 from django import forms
 import datetime
+from django.forms import ValidationError
 
 class ModificarStockForm(forms.Form):
     TIPO_COMPROBANTE = (
@@ -19,4 +20,17 @@ class IngresarProductoForm(forms.Form):
     nombre_producto = forms.CharField (label="Nombre del producto", required=True)
     fabricante_producto = forms.CharField (label="Nombre del fabricante", required=True)
     stock_producto = forms.IntegerField (label="Cantidad", required=True)
+
+
+
+def direccion_correcta(valor):
+    if not any(char.isdigit()for char in valor) or not any(char.isalpha() for char in valor):
+        raise ValidationError ('La dirección debe tener calle y altura')
+
+
+class NuevoFabricanteForm(forms.Form):
+    nombre=forms.CharField(label='Nombre')
+    direccion=forms.CharField(label='Dirección',validators=(direccion_correcta,))
+    telefono=forms.CharField(label='Teléfono')
+    mail=forms.EmailField(label='Email')
 
