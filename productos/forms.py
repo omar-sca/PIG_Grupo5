@@ -29,7 +29,7 @@ def direccion_correcta(valor):
 
 
 class NuevoFabricanteForm(forms.Form):
-    nombre=forms.CharField(label='Nombre')
+    nombre=forms.CharField(label='Nombre', max_length=50)
     direccion=forms.CharField(label='Dirección',validators=(direccion_correcta,))
     telefono=forms.CharField(label='Teléfono')
     mail=forms.EmailField(label='Email')
