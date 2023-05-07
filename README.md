@@ -40,7 +40,7 @@ Se dispondrá de tres niveles de usuario, cada nivel tendrá los permisos propio
   - Según el tipo de usuario, en la ultima columna, se mostrará un botón para editar el producto.
 - Ingresar y egresar mercadería: modificará el stock de los productos. Se asociará una factura a cada modificacion de stock.
 - Alta producto: perimitirá registrar nuevos productos en el sistema. El stock inicial para todo producto registrado será 0.
-- Ediar producto.
+- Editar producto.
 - Baja producto.
 - Alta fabricante.
 - Editar fabricante.
