@@ -37,10 +37,19 @@ def productos_mostrar(request):
     return HttpResponse(template.render(context,request))
 
 def producto_nuevo(request):
+    if request.method == 'POST':
+        IngresarProductoForma=IngresarProductoForm(request.POST)
+        if IngresarProductoForma.is_valid():
+            messages.success(request, 'Nuevo artículo agregado correctamente')
+        else:
+            messages.warning(request, 'Error en los datos cargados')
+    elif request.method=='GET':
+        IngresarProductoForma = IngresarProductoForm()
+    
     template = loader.get_template('productos/producto_nuevo.html')
     context={'IngresarProductoForm':IngresarProductoForm}
     return HttpResponse(template.render(context,request))
-    #return render(request,'productos/producto_nuevo.html')
+    ##return render(request,'productos/producto_nuevo.html')
 
 def producto_editar(request,id_prod):
     template = loader.get_template('productos/producto_editar.html')
