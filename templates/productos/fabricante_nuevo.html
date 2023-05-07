@@ -4,7 +4,12 @@
 {% block titulo %}Nuevo fabricante{% endblock titulo %}
 
 {% block contenido %}
-<h1>Agregar nuevo fabricante</h1>
+<div class="row justify-content-center mt-4 mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <h1 class="text-center">Agregar nuevo fabricante</h1>
 
 {% for message in messages %}
     <div class="alert alert-{{ message.tags }}" role="alert">
@@ -12,15 +17,19 @@
     </div>
 {% endfor %}
 
-<form id='nuevo-fabricante' name='nuevo-fabricante' action="{% url 'nuevo_fabricante' %}" method="POST">
-   
-    {% csrf_token %}
-    
-    {{form_nuevo_producto.as_p }}
-    
-    <button class='btn-secondary' type="submit">Agregar fabricante</button>
-
-</form>
-
+<div class="card-body">
+    <div class="form-group">
+        <form id='nuevo-fabricante' name='nuevo-fabricante' action="{% url 'nuevo_fabricante' %}" method="POST">
+            {% csrf_token %}
+            {{form_nuevo_producto.as_p }}
+    </div>
+    <button class="btn btn-secondary btn-block" type="submit">Agregar fabricante</button>
+        </form>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
 
 {% endblock contenido %}

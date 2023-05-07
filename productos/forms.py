@@ -12,7 +12,7 @@ class ModificarStockForm(forms.Form):
         choices=TIPO_COMPROBANTE,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    numero_comprobante = forms.CharField (label="Numero de comprobante", required=True)
+    numero_comprobante = forms.CharField (label="Número de comprobante", required=True)
     fecha_comprobante = forms.DateField(initial=datetime.date.today, label="Fecha de comprobante", required=True)
 
 

@@ -4,12 +4,24 @@
 {% block titulo %}Ingreso/Egreso de Productos{% endblock titulo %}
 
 {% block contenido %}
-<div class="text-center mx-auto" style="width: 500px;">
-<h1>Proximamente ingresar y egresar mercaderia</h1>
-<form action="{% url 'modificar_stock' %}" method="POST">
-    {% csrf_token %}
-    {{ ModificarStockForm.as_p }}
-    <button type="submit">Guardar</button>
-<form>
-</div> 
+<div class="row justify-content-center mt-4 mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <h1 class="text-center">Ingreso/Egreso de mercadería</h1>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <form action="{% url 'modificar_stock' %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ ModificarStockForm.as_p }}
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
+                            <form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
 {% endblock contenido %}
