@@ -1,7 +1,9 @@
 from django import forms
 import datetime
+import re
 from django.forms import ValidationError
 from django.forms.widgets import DateInput
+
 
 class ModificarStockForm(forms.Form):
     TIPO_COMPROBANTE = (
@@ -37,10 +39,14 @@ def direccion_correcta(valor):
     if not any(char.isdigit()for char in valor) or not any(char.isalpha() for char in valor):
         raise ValidationError ('La dirección debe tener calle y altura')
 
+def telefono_correcto(valor):
+    patron = r'^\d{2}-\d{8}$'
+    if not re.match(patron, valor):
+        raise forms.ValidationError('El número de teléfono debe cumplir el siguiente formato: 01-12345678')
 
 class NuevoFabricanteForm(forms.Form):
     nombre=forms.CharField(label='Nombre', max_length=50)
     direccion=forms.CharField(label='Dirección',validators=(direccion_correcta,))
-    telefono=forms.CharField(label='Teléfono')
+    telefono=forms.CharField(label='Teléfono', validators=(telefono_correcto,))
     mail=forms.EmailField(label='Email')
 

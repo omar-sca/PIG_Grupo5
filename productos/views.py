@@ -41,6 +41,8 @@ def producto_nuevo(request):
         ingresarProductoForma=IngresarProductoForm(request.POST)
         if ingresarProductoForma.is_valid():
             messages.success(request, 'Nuevo artículo agregado correctamente')
+            ingresarProductoForma = IngresarProductoForm()
+
         else:
             messages.warning(request, 'Error en los datos cargados')
     elif request.method=='GET':
@@ -71,6 +73,8 @@ def fabricante_nuevo(request):
         form_nuevo_prod=NuevoFabricanteForm(request.POST)
         if form_nuevo_prod.is_valid():
             messages.success(request, 'Nuevo fabricante agregado')
+            form_nuevo_prod = NuevoFabricanteForm()
+
         else:
             messages.warning(request, 'Error en los datos del formulario')
     elif request.method=='GET':
