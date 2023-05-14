@@ -21,15 +21,24 @@
     <div class="form-group">
         <form id='nuevo-fabricante' name='nuevo-fabricante' action="{% url 'nuevo_fabricante' %}" method="POST">
             {% csrf_token %}
-            {{form_nuevo_producto.as_p }}
-    </div>
-    <button class="btn btn-secondary btn-block" type="submit">Agregar fabricante</button>
-        </form>
+            <div class="row">
+                {% for campo in form_nuevo_fab %}
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label for="name" class="form-group">{{ campo.label }}</label>
+                            {{campo}}
+                        </div>
+                        <span class='error'>{{campo.errors}}</span>
+                    </div>
+                {% endfor %}
             </div>
-                </div>
+            <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
+                </form>
             </div>
-        </div>
     </div>
-</div>   
+</div>
+</div>
+</div>
+</div></div>     
 
 {% endblock contenido %}

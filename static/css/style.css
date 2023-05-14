@@ -33,4 +33,6 @@
         position: relative;
         text-align: right;
     }
-   
+    .error {
+        color: red;
+    }

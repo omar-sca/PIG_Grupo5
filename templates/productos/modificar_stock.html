@@ -14,14 +14,23 @@
                             <div class="form-group">
                                 <form action="{% url 'modificar_stock' %}" method="POST">
                                     {% csrf_token %}
-                                    {{ ModificarStockForm.as_p }}
-                            </div>
-                            <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
+                                    <div class="row"> 
+                                        {% for campo in ModificarStockForm %} 
+                                        <div class="col-md-12">
+                                            <div class="md-form mb-0">
+                                            <label for="name" class="form-group">{{ campo.label }}</label>
+                                            {{campo}}
+                                            </div>
+                                            <span class='error'>{{campo.errors}}</span>
+                                        </div> 
+                                        {% endfor %} </div>
+                                            <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
                             <form>
                         </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>    
 {% endblock contenido %}

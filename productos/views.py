@@ -70,18 +70,18 @@ def fabricante_editar(request,id_fabr):
 
 def fabricante_nuevo(request):
     if request.method =='POST':
-        form_nuevo_prod=NuevoFabricanteForm(request.POST)
-        if form_nuevo_prod.is_valid():
+        form_nuevo_fab=NuevoFabricanteForm(request.POST)
+        if form_nuevo_fab.is_valid():
             messages.success(request, 'Nuevo fabricante agregado')
-            form_nuevo_prod = NuevoFabricanteForm()
+            form_nuevo_fab = NuevoFabricanteForm()
 
         else:
             messages.warning(request, 'Error en los datos del formulario')
     elif request.method=='GET':
-        form_nuevo_prod = NuevoFabricanteForm()
+        form_nuevo_fab = NuevoFabricanteForm()
 
     template = loader.get_template('productos/fabricante_nuevo.html')
-    context={'form_nuevo_producto':form_nuevo_prod}
+    context={'form_nuevo_fab':form_nuevo_fab}
     return HttpResponse(template.render(context,request))
 
 def stock(request):
