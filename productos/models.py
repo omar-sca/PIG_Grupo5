@@ -19,10 +19,18 @@ class Items(models.Model):
     def __str__(self):
         return self.ItemName
 
+    class Tipo(models.TextChoices):
+        INGRESO = 'ING', 'Ingreso'
+        EGRESO = 'EGR', 'Egreso'
 
 class Facturas(models.Model):
+    class Tipo(models.TextChoices):
+        INGRESO = 'ING', 'Ingreso'
+        EGRESO = 'EGR', 'Egreso'
+    
     numbero = models.CharField(max_length=20)
     fecha = models.DateField()
+    tipo = models.CharField(max_length=2, choices=Tipo.choices, default=Tipo.INGRESO)
 
     def __str__(self):
         return self.InvoiceNumber
