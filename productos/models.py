@@ -19,10 +19,6 @@ class Items(models.Model):
     def __str__(self):
         return self.ItemName
 
-    class Tipo(models.TextChoices):
-        INGRESO = 'ING', 'Ingreso'
-        EGRESO = 'EGR', 'Egreso'
-
 class Facturas(models.Model):
     class Tipo(models.TextChoices):
         INGRESO = 'ING', 'Ingreso'
