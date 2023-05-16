@@ -30,7 +30,7 @@ class Facturas(models.Model):
     
     numbero = models.CharField(max_length=20)
     fecha = models.DateField()
-    tipo = models.CharField(max_length=2, choices=Tipo.choices, default=Tipo.INGRESO)
+    tipo = models.CharField(max_length=3, choices=Tipo.choices, default=Tipo.INGRESO)
 
     def __str__(self):
         return self.InvoiceNumber
