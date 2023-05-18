@@ -4,7 +4,8 @@ from django.template import loader
 from django.http import HttpResponse
 from productos.forms import IngresarProductoForm, ModificarStockForm,NuevoFabricanteForm
 from django.contrib import messages
-
+from django.views.generic import ListView
+from productos.models import Fabricante
 
 
 # Create your views here.
@@ -58,10 +59,18 @@ def producto_editar(request,id_prod):
     context={'id_item':id_prod}
     return HttpResponse(template.render(context,request))
 
-def fabricantes_mostrar(request):
-    template = loader.get_template('productos/fabricantes.html')
-    context={'fabricantes':listaFabricantes}
-    return HttpResponse(template.render(context,request))
+#def fabricantes_mostrar(request):
+#    template = loader.get_template('productos/fabricantes.html')
+#    context={'fabricantes':listaFabricantes}
+#    return HttpResponse(template.render(context,request))
+ 
+class FabricantesL(ListView):
+    model = Fabricante
+    template_name = 'productos/fabricantes.html'
+    context_object_name = 'fabricantes'
+    queryset = Fabricante.objects.all()
+
+ 
     
 def fabricante_editar(request,id_fabr):
     template = loader.get_template('productos/fabricante_editar.html')
@@ -73,6 +82,7 @@ def fabricante_nuevo(request):
         form_nuevo_fab=NuevoFabricanteForm(request.POST)
         if form_nuevo_fab.is_valid():
             messages.success(request, 'Nuevo fabricante agregado')
+            form_nuevo_fab.save()
             form_nuevo_fab = NuevoFabricanteForm()
 
         else:

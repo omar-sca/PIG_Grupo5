@@ -33,14 +33,14 @@
                 <tbody>
 
                     <h1 class="text-center">Fabricantes:</h1>
-                    {% for e in fabricantes %}
+                    {% for f in fabricantes %}
                     <tr role="row">
-                        <td class="align-middle">{{e.1}}</td>
-                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.2}}</td>
-                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.3}}</td>
-                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.4}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.nombre}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.direccion}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.telefono}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.email}}</td>
                         {% load static %}
-                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar_fabricante' e.0 %}"><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar_fabricante' f.id %}"><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
                     </tr>
                     {% endfor %}
 

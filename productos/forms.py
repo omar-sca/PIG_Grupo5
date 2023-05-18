@@ -3,6 +3,7 @@ import datetime
 import re
 from django.forms import ValidationError
 from django.forms.widgets import DateInput
+from productos.models import Fabricante
 
 
 class ModificarStockForm(forms.Form):
@@ -44,9 +45,12 @@ def telefono_correcto(valor):
     if not re.match(patron, valor):
         raise forms.ValidationError('El número de teléfono debe cumplir el siguiente formato: 01-12345678')
 
-class NuevoFabricanteForm(forms.Form):
+class NuevoFabricanteForm(forms.ModelForm):
+    class Meta:
+        model= Fabricante
+        fields = ['nombre', 'direccion', 'telefono', 'email']
     nombre=forms.CharField(label='Nombre', max_length=50)
     direccion=forms.CharField(label='Dirección',validators=(direccion_correcta,))
     telefono=forms.CharField(label='Teléfono', validators=(telefono_correcto,))
-    mail=forms.EmailField(label='Email')
+    email=forms.EmailField(label='Email')
 

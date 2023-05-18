@@ -8,7 +8,7 @@ class Fabricante(models.Model):
     email = models.EmailField(max_length=50)
 
     def __str__(self):
-        return self.ManufacturerName
+        return self.nombre
 
 
 class Items(models.Model):
@@ -17,19 +17,19 @@ class Items(models.Model):
     stock = models.IntegerField()
 
     def __str__(self):
-        return self.ItemName
+        return self.nombre
 
 class Facturas(models.Model):
     class Tipo(models.TextChoices):
         INGRESO = 'ING', 'Ingreso'
         EGRESO = 'EGR', 'Egreso'
     
-    numbero = models.CharField(max_length=20)
+    numero = models.CharField(max_length=20)
     fecha = models.DateField()
     tipo = models.CharField(max_length=3, choices=Tipo.choices, default=Tipo.INGRESO)
 
     def __str__(self):
-        return self.InvoiceNumber
+        return self.numero
 
 class FacturaProducto(models.Model):
     factura = models.ForeignKey(Facturas, on_delete=models.CASCADE)
