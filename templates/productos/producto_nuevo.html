@@ -18,7 +18,7 @@
                 <form id='nuevo_producto' name='nuevo_producto' action="{% url 'nuevo_producto' %}" method="POST"> 
                     {% csrf_token %} 
                     <div class="row"> 
-                        {% for campo in IngresarProductoForm %} 
+                        {% for campo in form_nuevoProd %} 
                         <div class="col-md-12">
                             <div class="md-form mb-0">
                             <label for="name" class="form-group">{{ campo.label }}</label>

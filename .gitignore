@@ -20,3 +20,5 @@ usuarios/migrations/__pycache__/__init__.cpython-39.pyc
 productos/__pycache__/forms.cpython-39.pyc
 .vscode/settings.json
 .env
+__pycache__
+.vscode/
