@@ -2,7 +2,7 @@ from re import template
 from django.shortcuts import render,redirect
 from django.template import loader
 from django.http import HttpResponse
-from productos.forms import NuevoProductoForm, ModificarStockForm,NuevoFabricanteForm,EditarProductoForm
+from productos.forms import NuevoProductoForm, ModificarStockForm,NuevoFabricanteForm,EditarProductoForm, EditarFabricanteForm
 from django.contrib import messages
 from django.views.generic import ListView
 from productos.models import Fabricante,Items
@@ -47,6 +47,14 @@ def producto_editar(request,id_prod):
         form_EditProd = EditarProductoForm(instance=producto)
     return render(request, 'productos/producto_editar.html', {'formEditarProd': form_EditProd})
 
+def producto_eliminar(request,id_prod):
+    try:
+        producto =Items.objects.get(pk=id_prod)
+    except Items.DoesNotExist:
+        return render(request, '404_admin.html')
+    producto.delete()
+    return redirect('productos')   
+
 #def fabricantes_mostrar(request):
 #    template = loader.get_template('productos/fabricantes.html')
 #    context={'fabricantes':listaFabricantes}
@@ -60,9 +68,22 @@ class FabricantesL(ListView):
 
 
 def fabricante_editar(request,id_fabr):
-    template = loader.get_template('productos/fabricante_editar.html')
-    context={'id_fabricante':id_fabr}
-    return HttpResponse(template.render(context,request))
+    #template = loader.get_template('productos/fabricante_editar.html')
+    #context={'id_fabricante':id_fabr}
+    #return HttpResponse(template.render(context,request))
+    try:
+        fabricante =Fabricante.objects.get(pk=id_fabr)
+    except Fabricante.DoesNotExist:
+        return render(request, '404_admin.html')
+
+    if (request.method == 'POST'):
+        form_EditFabr = EditarFabricanteForm(request.POST, instance=fabricante)
+        if form_EditFabr.is_valid():
+            form_EditFabr.save()
+            return redirect('fabricantes')
+    else:
+        form_EditFabr = EditarFabricanteForm(instance=fabricante)
+    return render(request, 'productos/fabricante_editar.html', {'formEditarFabr': form_EditFabr})    
 
 def fabricante_nuevo(request):
     if request.method =='POST':
@@ -81,6 +102,15 @@ def fabricante_nuevo(request):
     context={'form_nuevo_fab':form_nuevo_fab}
     return HttpResponse(template.render(context,request))
 
+def fabricante_eliminar(request,id_fabr):
+    try:
+        fabricante =Fabricante.objects.get(pk=id_fabr)
+    except Fabricante.DoesNotExist:
+        return render(request, '404_admin.html')
+    fabricante.delete()
+    return redirect('fabricantes')    
+    
+    
 def stock(request):
     template = loader.get_template('productos/modificar_stock.html')
     context={'ModificarStockForm':ModificarStockForm}

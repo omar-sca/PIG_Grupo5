@@ -62,4 +62,13 @@ class NuevoFabricanteForm(forms.ModelForm):
     direccion=forms.CharField(label='Dirección',validators=(direccion_correcta,))
     telefono=forms.CharField(label='Teléfono', validators=(telefono_correcto,))
     email=forms.EmailField(label='Email')
+    
+class EditarFabricanteForm(forms.ModelForm):
+    class Meta:
+        model= Fabricante
+        fields = ['nombre', 'direccion', 'telefono', 'email']
+    nombre=forms.CharField(label='Nombre', max_length=50)
+    direccion=forms.CharField(label='Dirección',validators=(direccion_correcta,))
+    telefono=forms.CharField(label='Teléfono', validators=(telefono_correcto,))
+    email=forms.EmailField(label='Email')
 
