@@ -44,7 +44,7 @@ Se dispondrá de tres niveles de usuario, cada nivel tendrá los permisos propio
 - Ver fabricantes: se listarán en una tabla los fabricantes que están dados de alta en el sistema con su correspondiente nombre, dirección, telefono y email.
 - Alta fabricante.
 - Editar fabricante.
-- Baja fabricante: permitirá eliminar fabricantes del sistema. Al eliminar un fabricante, se eliminarán los productos asociados.
+- Baja fabricante: permitirá eliminar fabricantes del sistema. Al eliminar un fabricante, se eliminarán los productos asociados al mismo.
 - Ingresar y egresar mercadería: modificará el stock de los productos. Se asociará un comprobante a cada modificación de stock.
 - Ver comprobantes: se listarán los comprobantes y se permititrá acceder al detalle del mismo.
 - Ver usuarios.
