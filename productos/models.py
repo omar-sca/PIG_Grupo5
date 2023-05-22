@@ -19,7 +19,7 @@ class Items(models.Model):
     def __str__(self):
         return self.nombre
 
-class Facturas(models.Model):
+class Comprobantes(models.Model):
     class Tipo(models.TextChoices):
         INGRESO = 'ING', 'Ingreso'
         EGRESO = 'EGR', 'Egreso'
@@ -27,10 +27,12 @@ class Facturas(models.Model):
     numero = models.CharField(max_length=20)
     fecha = models.DateField()
     tipo = models.CharField(max_length=3, choices=Tipo.choices, default=Tipo.INGRESO)
+    articulos = models.ManyToManyField(Items,through='ComprobanteProducto')
 
     def __str__(self):
         return self.numero
 
-class FacturaProducto(models.Model):
-    factura = models.ForeignKey(Facturas, on_delete=models.CASCADE)
+class ComprobanteProducto(models.Model):
+    comprobante = models.ForeignKey(Comprobantes, on_delete=models.CASCADE)
     articulo = models.ForeignKey(Items, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
