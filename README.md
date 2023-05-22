@@ -37,15 +37,16 @@ Se dispondrá de tres niveles de usuario, cada nivel tendrá los permisos propio
 
 ### Funcionalidades:
 - Ver productos: se listarán en una tabla los productos que están dados de alta en el sistema con su correspondiente nombre, fabricante y stock.
-  - Según el tipo de usuario, en la ultima columna, se mostrará un botón para editar el producto.
-- Ingresar y egresar mercadería: modificará el stock de los productos. Se asociará una factura a cada modificacion de stock.
-- Alta producto: perimitirá registrar nuevos productos en el sistema. El stock inicial para todo producto registrado será 0.
+  - Según el tipo de usuario, en la ultima columna, se mostrará un botón para editar y eliminar el producto.
+- Alta producto: perimitirá registrar nuevos productos en el sistema.
 - Editar producto.
 - Baja producto.
+- Ver fabricantes: se listarán en una tabla los fabricantes que están dados de alta en el sistema con su correspondiente nombre, dirección, telefono y email.
 - Alta fabricante.
 - Editar fabricante.
-- Baja fabricante.
-- Ver facturas: se listarán las facturas y se permititrá acceder al detalle de la misma.
+- Baja fabricante: permitirá eliminar fabricantes del sistema. Al eliminar un fabricante, se eliminarán los productos asociados.
+- Ingresar y egresar mercadería: modificará el stock de los productos. Se asociará un comprobante a cada modificación de stock.
+- Ver comprobantes: se listarán los comprobantes y se permititrá acceder al detalle del mismo.
 - Ver usuarios.
 - Alta usuario.
 - Editar usuario.
