@@ -52,6 +52,7 @@ Se dispondrá de tres niveles de usuario, cada nivel tendrá los permisos propio
 - Baja usuario.
 
 ## Diagramas
-
+### Diagrama de Clases
+![DiagramaDeClases](/DiagramaDeClases.png)
 ### Diagrama Entidad Relación (DER)
 ![DER](/DER.png)
