@@ -5,16 +5,16 @@ from django.http import HttpResponse
 from productos.forms import NuevoProductoForm, ModificarStockForm,NuevoFabricanteForm,EditarProductoForm, EditarFabricanteForm
 from django.contrib import messages
 from django.views.generic import ListView
-from productos.models import Fabricante,Items
+from productos.models import Fabricante,Item
 
 
 # Create your views here.
 
 class ProductosMostrar(ListView):
-    model = Items
+    model = Item
     template_name = 'productos/productos.html'
     context_object_name = 'productos'
-    queryset = Items.objects.all().order_by('nombre')
+    queryset = Item.objects.all().order_by('nombre')
 
 def producto_nuevo(request):
     if request.method == 'POST':
@@ -34,8 +34,8 @@ def producto_nuevo(request):
 
 def producto_editar(request,id_prod):
     try:
-        producto =Items.objects.get(pk=id_prod)
-    except Items.DoesNotExist:
+        producto =Item.objects.get(pk=id_prod)
+    except Item.DoesNotExist:
         return render(request, '404_admin.html')
 
     if (request.method == 'POST'):
@@ -49,8 +49,8 @@ def producto_editar(request,id_prod):
 
 def producto_eliminar(request,id_prod):
     try:
-        producto =Items.objects.get(pk=id_prod)
-    except Items.DoesNotExist:
+        producto =Item.objects.get(pk=id_prod)
+    except Item.DoesNotExist:
         return render(request, '404_admin.html')
     producto.delete()
     return redirect('productos')   

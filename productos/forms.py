@@ -3,7 +3,7 @@ import datetime
 import re
 from django.forms import ValidationError
 from django.forms.widgets import DateInput
-from productos.models import Fabricante,Items
+from productos.models import Fabricante,Item
 
 
 class ModificarStockForm(forms.Form):
@@ -32,7 +32,7 @@ def numero_valido(valor):
 
 class NuevoProductoForm(forms.ModelForm):
     class Meta:
-        model= Items
+        model= Item
         fields = ['nombre', 'fabricante', 'stock']
     nombre = forms.CharField (label="Nombre del producto", required=True)
     stock = forms.IntegerField (label="Cantidad", validators=(numero_valido,))
@@ -40,7 +40,7 @@ class NuevoProductoForm(forms.ModelForm):
 
 class EditarProductoForm(forms.ModelForm):
     class Meta:
-        model= Items
+        model= Item
         fields = ['nombre', 'fabricante']
 
 

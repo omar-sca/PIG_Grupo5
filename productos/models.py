@@ -11,7 +11,7 @@ class Fabricante(models.Model):
         return self.nombre
 
 
-class Items(models.Model):
+class Item(models.Model):
     nombre = models.CharField(max_length=100)
     fabricante = models.ForeignKey(Fabricante, on_delete=models.CASCADE)
     stock = models.IntegerField()
@@ -19,7 +19,7 @@ class Items(models.Model):
     def __str__(self):
         return self.nombre
 
-class Comprobantes(models.Model):
+class Comprobante(models.Model):
     class Tipo(models.TextChoices):
         INGRESO = 'ING', 'Ingreso'
         EGRESO = 'EGR', 'Egreso'
@@ -27,12 +27,12 @@ class Comprobantes(models.Model):
     numero = models.CharField(max_length=20)
     fecha = models.DateField()
     tipo = models.CharField(max_length=3, choices=Tipo.choices, default=Tipo.INGRESO)
-    articulos = models.ManyToManyField(Items,through='ComprobanteProducto')
+    articulos = models.ManyToManyField(Item,through='ComprobanteProducto')
 
     def __str__(self):
         return self.numero
 
 class ComprobanteProducto(models.Model):
-    comprobante = models.ForeignKey(Comprobantes, on_delete=models.CASCADE)
-    articulo = models.ForeignKey(Items, on_delete=models.CASCADE)
+    comprobante = models.ForeignKey(Comprobante, on_delete=models.CASCADE)
+    articulo = models.ForeignKey(Item, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
