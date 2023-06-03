@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Fabricante(models.Model):
     nombre = models.CharField(max_length=50)
     direccion = models.CharField(max_length=100)
@@ -19,6 +21,7 @@ class Item(models.Model):
     def __str__(self):
         return self.nombre
 
+
 class Comprobante(models.Model):
     class Tipo(models.TextChoices):
         INGRESO = 'ING', 'Ingreso'
@@ -31,6 +34,7 @@ class Comprobante(models.Model):
 
     def __str__(self):
         return self.numero
+
 
 class ComprobanteProducto(models.Model):
     comprobante = models.ForeignKey(Comprobante, on_delete=models.CASCADE)
