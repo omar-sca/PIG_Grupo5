@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from productos.forms import NuevoProductoForm, ModificarStockForm,NuevoFabricanteForm,EditarProductoForm, EditarFabricanteForm
 from django.contrib import messages
 from django.views.generic import ListView
-from productos.models import Fabricante,Item
+from productos.models import Fabricante,Item,Comprobante,ComprobanteProducto
 
 
 # Create your views here.
@@ -120,8 +120,17 @@ def stock(request):
     #return HttpResponse(template.render(context,request))
     #return render(request,'productos/modificar_stock.html')
 
-def ver_comprobantes(request):
-    #template = loader.get_template('productos/facturas.html')
-    #context={'':}
-    #return HttpResponse(template.render(context,request))
-    return render(request,'productos/comprobantes.html')
+
+class VerComprobantes(ListView):
+    model = Comprobante
+    template_name = 'productos/comprobantes.html'
+    context_object_name = 'comprobantes'
+    queryset = Comprobante.objects.all().order_by('-fecha')
+
+
+def comprobante_detalle(request,id_compr):
+    template = loader.get_template('productos/comprobante_detalle.html')   
+    lista_Prod=ComprobanteProducto.objects.filter(comprobante_id=id_compr)
+    comprobante=Comprobante.objects.get(pk=id_compr)
+    context={'detalle_productos':lista_Prod,'comprobante':comprobante}
+    return HttpResponse(template.render(context,request))

@@ -25,25 +25,22 @@
                             </th>
                         <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
                             rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
-                            </th>                            
-                         
+                            </th>
                     </tr>
                 </thead>
-                <tbody>
 
+                <tbody>
                     <h1 class="text-center">Productos:</h1>
                     {% for e in productos %}
                     <tr role="row">
                         <td class="align-middle">{{e.nombre}}</td>
                         <td class="align-middle">{{e.fabricante}}</td>
-                        <td class="align-middle d-none d-sm-table-cell sorting_1">{{e.stock}}</td>
+                        <td class="align-middle d-none d-sm-table-cell sorting_1 text-center">{{e.stock}}</td>
                         {% load static %}
                         <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar_producto' e.id %}"><img class="img-edit" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
                         <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'eliminar_producto' e.id %}"><img class="img-edit" src="{%static '\img\trash.svg' %}" alt="" ></a></td>
-                 
                     </tr>
                     {% endfor %}
-
                 </tbody>
             </table>
         </div>

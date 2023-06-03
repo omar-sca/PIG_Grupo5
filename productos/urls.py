@@ -12,6 +12,7 @@ urlpatterns = [
     path('fabricantes/editar/<int:id_fabr>', views.fabricante_editar, name='editar_fabricante'),
     path('fabricantes/eliminar/<int:id_fabr>', views.fabricante_eliminar, name='eliminar_fabricante'),
     path('modificar_stock/', views.stock, name='modificar_stock'),
-    path('comprobantes/', views.ver_comprobantes),
+    path('comprobantes/', views.VerComprobantes.as_view(), name='comprobantes'),
+    path('comprobantes/<int:id_compr>/', views.comprobante_detalle, name='comprobante_detalle'),
 ]
     
