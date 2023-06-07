@@ -17,20 +17,21 @@
                                     <div class="row"> 
                                         {% for campo in ModificarStockForm %} 
                                         <div class="col-md-12">
-                                            <div class="md-form mb-0">
-                                            <label for="name" class="form-group">{{ campo.label }}</label>
+                                            <div class="mb-3">
+                                            <label for="name" class="form-label">{{ campo.label }}</label>
                                             {{campo}}
                                             </div>
                                             <span class='error'>{{campo.errors}}</span>
                                         </div> 
-                                        {% endfor %} </div>
-                                            <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
-                            <form>
+                                        {% endfor %} 
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
+                                </form>
+                            </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>    
-{% endblock contenido %}
+</div>{% endblock contenido %}

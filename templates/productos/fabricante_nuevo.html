@@ -19,26 +19,25 @@
 
 <div class="card-body">
     <div class="form-group">
-        <form id='nuevo-fabricante' name='nuevo-fabricante' action="{% url 'nuevo_fabricante' %}" method="POST">
+        <form id="nuevo-fabricante" name="nuevo-fabricante" action="{% url 'nuevo_fabricante' %}" method="POST">
             {% csrf_token %}
             <div class="row">
                 {% for campo in form_nuevo_fab %}
                     <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <label for="name" class="form-group">{{ campo.label }}</label>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">{{ campo.label }}</label>
                             {{campo}}
                         </div>
-                        <span class='error'>{{campo.errors}}</span>
+                        <span class="error">{{campo.errors}}</span>
                     </div>
                 {% endfor %}
             </div>
             <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
-                </form>
-            </div>
+        </form>
     </div>
 </div>
 </div>
 </div>
-</div></div>     
-
+</div>
+</div>
 {% endblock contenido %}
