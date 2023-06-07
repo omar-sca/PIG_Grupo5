@@ -24,3 +24,5 @@ __pycache__
 .vscode/
 productos/migrations/0002_rename_numbero_facturas_numero.py
 productos/migrations/__pycache__/0001_initial.cpython-39.pyc
+productos/migrations/0002_auto_20230523_1927.py
+productos/migrations/0001_initial.py
