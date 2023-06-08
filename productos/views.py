@@ -6,7 +6,8 @@ from productos.forms import NuevoProductoForm, ModificarStockForm,NuevoFabricant
 from django.contrib import messages
 from django.views.generic import ListView
 from productos.models import Fabricante,Item,Comprobante,ComprobanteProducto
-
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
