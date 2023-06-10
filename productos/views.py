@@ -8,6 +8,9 @@ from django.views.generic import ListView
 from productos.models import Fabricante,Item,Comprobante,ComprobanteProducto
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView, LogoutView
+
 
 # Create your views here.
 
@@ -135,3 +138,8 @@ def comprobante_detalle(request,id_compr):
     comprobante=Comprobante.objects.get(pk=id_compr)
     context={'detalle_productos':lista_Prod,'comprobante':comprobante}
     return HttpResponse(template.render(context,request))
+
+class SalirLogoutView(LogoutView):
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        return redirect('bienvenida')    
