@@ -26,6 +26,9 @@ def editar_usuario(request):
     return render(request,"usuarios/base_usuarios.html")
 
 def inicio_sesion(request):
+    if request.user.is_authenticated:
+        return redirect('productos')
+    
     if request.method == 'POST':
         # AuthenticationForm_can_also_be_used__
         username = request.POST['username']
