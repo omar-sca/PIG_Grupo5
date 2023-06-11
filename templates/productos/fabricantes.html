@@ -4,9 +4,11 @@
 {% block titulo %}Ver fabricantes{% endblock titulo %}
 
 {% block contenido %}
+{% if perms.productos.add_item %}
 <div class='link-right'> 
 <a href="/productos/fabricantes/nuevo"> Agregar fabricante</a>
 </div>
+{% endif %}
 <div id="tb_quizlist_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
     <div class="row">
         <div class="col-sm-12">
