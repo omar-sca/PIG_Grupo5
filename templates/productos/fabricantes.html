@@ -25,12 +25,14 @@
                         <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
                             rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
                             Mail</th>
+                        {% if perms.productos.change_fabricante %}
                         <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
                             rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
                             </th>
                         <th class="d-none d-sm-table-cell sorting_desc" tabindex="0" aria-controls="tb_quizlist"
                             rowspan="1" colspan="1" aria-sort="descending" aria-label="" style="width: 0px;">
                             </th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -42,10 +44,11 @@
                         <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.direccion}}</td>
                         <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.telefono}}</td>
                         <td class="align-middle d-none d-sm-table-cell sorting_1">{{f.email}}</td>
+                        {% if perms.productos.change_fabricante %}
                         {% load static %}
                         <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'editar_fabricante' f.id %}"><img class="img-edit" title="Editar" src="{%static '\img\pen-field.svg' %}" alt="" ></a></td>
                         <td class="align-middle d-none d-sm-table-cell sorting_1 "> <a class="" href="{% url 'eliminar_fabricante' f.id %}"><img class="img-edit" title="Eliminar" src="{%static '\img\trash.svg' %}" alt="" ></a></td>
-                        
+                        {% endif %}
                     </tr>
                     {% endfor %}
 

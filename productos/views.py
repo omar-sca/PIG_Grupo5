@@ -6,13 +6,14 @@ from productos.forms import NuevoProductoForm, ModificarStockForm,NuevoFabricant
 from django.contrib import messages
 from django.views.generic import ListView
 from productos.models import Fabricante,Item,Comprobante,ComprobanteProducto
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
-# Create your views here.
+#Create your views here.
 
 class ProductosMostrar(ListView):
     model = Item
@@ -20,6 +21,8 @@ class ProductosMostrar(ListView):
     context_object_name = 'productos'
     queryset = Item.objects.all().order_by('nombre')
 
+
+@permission_required('add_item')
 def producto_nuevo(request):
     if request.method == 'POST':
         form_ingresarProducto=NuevoProductoForm(request.POST)
@@ -36,6 +39,7 @@ def producto_nuevo(request):
     context={'form_nuevoProd':form_ingresarProducto}
     return HttpResponse(template.render(context,request))
 
+@permission_required('change_item')
 def producto_editar(request,id_prod):
     try:
         producto =Item.objects.get(pk=id_prod)
@@ -51,6 +55,7 @@ def producto_editar(request,id_prod):
         form_EditProd = EditarProductoForm(instance=producto)
     return render(request, 'productos/producto_editar.html', {'formEditarProd': form_EditProd})
 
+@permission_required('delete_item')
 def producto_eliminar(request,id_prod):
     try:
         producto =Item.objects.get(pk=id_prod)
@@ -70,7 +75,7 @@ class FabricantesL(ListView):
     context_object_name = 'fabricantes'
     queryset = Fabricante.objects.all().order_by('nombre')
 
-
+@permission_required('change_fabricante')
 def fabricante_editar(request,id_fabr):
     #template = loader.get_template('productos/fabricante_editar.html')
     #context={'id_fabricante':id_fabr}
@@ -89,6 +94,7 @@ def fabricante_editar(request,id_fabr):
         form_EditFabr = EditarFabricanteForm(instance=fabricante)
     return render(request, 'productos/fabricante_editar.html', {'formEditarFabr': form_EditFabr})    
 
+@permission_required('add_fabricante')
 def fabricante_nuevo(request):
     if request.method =='POST':
         form_nuevo_fab=NuevoFabricanteForm(request.POST)
@@ -106,6 +112,7 @@ def fabricante_nuevo(request):
     context={'form_nuevo_fab':form_nuevo_fab}
     return HttpResponse(template.render(context,request))
 
+@permission_required('delete_fabricante')
 def fabricante_eliminar(request,id_fabr):
     try:
         fabricante =Fabricante.objects.get(pk=id_fabr)
@@ -114,7 +121,7 @@ def fabricante_eliminar(request,id_fabr):
     fabricante.delete()
     return redirect('fabricantes')    
     
-    
+@login_required
 def stock(request):
     template = loader.get_template('productos/modificar_stock.html')
     context={'ModificarStockForm':ModificarStockForm}
@@ -131,13 +138,14 @@ class VerComprobantes(ListView):
     context_object_name = 'comprobantes'
     queryset = Comprobante.objects.all().order_by('-fecha')
 
-
+@login_required
 def comprobante_detalle(request,id_compr):
     template = loader.get_template('productos/comprobante_detalle.html')   
     lista_Prod=ComprobanteProducto.objects.filter(comprobante_id=id_compr)
     comprobante=Comprobante.objects.get(pk=id_compr)
     context={'detalle_productos':lista_Prod,'comprobante':comprobante}
     return HttpResponse(template.render(context,request))
+
 
 class SalirLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
