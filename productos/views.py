@@ -15,7 +15,8 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 #Create your views here.
 
-class ProductosMostrar(ListView):
+class ProductosMostrar(PermissionRequiredMixin, ListView):
+    permission_required='productos.view_item'
     model = Item
     template_name = 'productos/productos.html'
     context_object_name = 'productos'
@@ -69,7 +70,8 @@ def producto_eliminar(request,id_prod):
 #    context={'fabricantes':listaFabricantes}
 #    return HttpResponse(template.render(context,request))
  
-class FabricantesL(ListView):
+class FabricantesL(PermissionRequiredMixin, ListView):
+    permission_required='productos.view_fabricante'
     model = Fabricante
     template_name = 'productos/fabricantes.html'
     context_object_name = 'fabricantes'
@@ -132,7 +134,8 @@ def stock(request):
     #return render(request,'productos/modificar_stock.html')
 
 
-class VerComprobantes(ListView):
+class VerComprobantes(PermissionRequiredMixin, ListView):
+    permission_required='productos.view_comprobante'
     model = Comprobante
     template_name = 'productos/comprobantes.html'
     context_object_name = 'comprobantes'
