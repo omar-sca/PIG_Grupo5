@@ -20,6 +20,11 @@ class Item(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+    def modificarStock(self,cantidad):
+        self.stock += cantidad
+        self.save()
+    
 
 
 class Comprobante(models.Model):
@@ -34,7 +39,21 @@ class Comprobante(models.Model):
 
     def __str__(self):
         return self.numero
+    
+    def __modificarStock(self,lista,coef):
+        for e in lista:
+                e[0].modificarStock(coef*e[1])
 
+    def comprobarStock(self,lista):
+        if self.tipo=='ING':
+            self.__modificarStock(lista,1)
+            return True
+        elif self.tipo=='EGR':
+            if all(art[0].stock >= art[1] for art in lista):
+                self.__modificarStock(lista,-1)
+                return True
+            else:
+                return False
 
 class ComprobanteProducto(models.Model):
     comprobante = models.ForeignKey(Comprobante, on_delete=models.CASCADE)

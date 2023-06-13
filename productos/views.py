@@ -137,14 +137,21 @@ def stock(request):
             comprobante.tipo=form_stock_enc.cleaned_data['tipo']
             comprobante.fecha=form_stock_enc.cleaned_data['fecha']
             comprobante.numero=form_stock_enc.cleaned_data['numero']
-            comprobante.save()
-
+            
+            listaProductos=[]
             for form in formsets_stock_artic:
-                comprobante.articulos.add(form.cleaned_data['articulo'],through_defaults={'cantidad': form.cleaned_data['cantidad']})
-
-            messages.success(request, 'Modificacion de stock exitosa')
-            form_stock_enc =ModificarStockForm(prefix='encabezado')
-            formsets_stock_artic=formset_factory(ModificarStockArticulosForm,extra=1)    
+                tupla=(form.cleaned_data['articulo'],form.cleaned_data['cantidad'])
+                listaProductos.append(tupla)
+                
+            if comprobante.comprobarStock(listaProductos):
+                comprobante.save()
+                for form in formsets_stock_artic:
+                    comprobante.articulos.add(form.cleaned_data['articulo'],through_defaults={'cantidad': form.cleaned_data['cantidad']})
+                messages.success(request, 'Modificacion de stock exitosa')
+                form_stock_enc =ModificarStockForm(prefix='encabezado')
+                formsets_stock_artic=formset_factory(ModificarStockArticulosForm,extra=1)  
+            else:
+                messages.warning(request, 'No hay suficiente stock para realizar el egreso de mercadería solicitado')
         else:
             messages.warning(request, 'Error en los datos del formulario')
     elif request.method=='GET':

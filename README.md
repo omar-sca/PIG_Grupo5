@@ -27,7 +27,7 @@ Se dispondrá de tres niveles de usuario, cada nivel tendrá los permisos propio
   - Alta fabricante.
   - Editar fabricante.
   - Baja fabricante.
-  - Ver facturas.
+  - Ver comprobantes.
 
 - Administrador (Nivel 3):
   - Ver usuarios.
