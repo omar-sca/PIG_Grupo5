@@ -3,21 +3,25 @@ import datetime
 import re
 from django.forms import ValidationError
 from django.forms.widgets import DateInput
-from productos.models import Fabricante,Item
+from productos.models import Fabricante,Item,Comprobante,ComprobanteProducto
 
 
 class ModificarStockForm(forms.Form):
+    class Meta:
+        model= Comprobante
+        fields = ['tipo', 'fecha', 'numero']
+
     TIPO_COMPROBANTE = (
         ('', '-Seleccione-'),
-        (1, 'Ingreso'),
-        (2, 'Egreso'),)
-    tipo_comprobante = forms.ChoiceField(
+        ('ING', 'Ingreso'),
+        ('EGR', 'Egreso'),)
+    tipo = forms.ChoiceField(
         label='Tipo de comprobante',
         choices=TIPO_COMPROBANTE,
         widget=forms.Select(attrs={'class': 'form-group'})
     )
-    numero_comprobante = forms.CharField (label="Número de comprobante", required=True)
-    fecha_comprobante = forms.DateField(
+    numero = forms.CharField (label="Número de comprobante", required=True)
+    fecha = forms.DateField(
         initial=datetime.date.today,
         label="Fecha de comprobante",
         required=True,
@@ -28,6 +32,14 @@ class ModificarStockForm(forms.Form):
 def numero_valido(valor):
     if valor <= 0:
         raise ValidationError('La cantidad no puede ser menor a 0.')
+
+
+class ModificarStockArticulosForm(forms.ModelForm):
+    class Meta:
+        model= ComprobanteProducto
+        fields = ['articulo','cantidad']
+    articulo=forms.ModelChoiceField(queryset=Item.objects.all().order_by('nombre'))
+    cantidad = forms.IntegerField (label="Cantidad", validators=(numero_valido,))
 
 
 class NuevoProductoForm(forms.ModelForm):

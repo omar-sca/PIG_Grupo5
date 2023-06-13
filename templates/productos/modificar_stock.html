@@ -1,7 +1,7 @@
 
 {% extends 'productos\base_productos.html' %}
 
-{% block titulo %}Ingreso/Egreso de Productos{% endblock titulo %}
+{% block titulo %}Ingreso/Egreso de Mercadería{% endblock titulo %}
 
 {% block contenido %}
 <div class="row justify-content-center mt-4 mb-4">
@@ -10,6 +10,12 @@
             <div class="card-body">
                 <div class="form-group">
                     <h1 class="text-center">Ingreso/Egreso de mercadería</h1>
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+
                         <div class="card-body">
                             <div class="form-group">
                                 <form action="{% url 'modificar_stock' %}" method="POST">
@@ -25,6 +31,29 @@
                                         </div> 
                                         {% endfor %} 
                                     </div>
+
+                                    <div class="row"> 
+                                        {{ form.management_form }}
+                                        {% for art in form %} 
+                                        <div class="col-md-12 articulo0">
+                                            <div class="mb-3">
+                                            <label for="name" class="form-label">{{ art.label }}</label>
+                                            {{art}}
+                                            </div>
+                                            <span class='error'>{{art.errors}}</span>
+                                        </div> 
+                                        {% endfor %} 
+                                    </div>
+
+                                    <div style="direction: rtl">
+                                        <button type="button" class="btn btn-outline-success" id="btn_add"
+                                            style="margin-bottom: 2vw;box-shadow: none; "
+                                            onclick="agregarProducto();">+</button>
+                                        <button type="button" class="btn btn-outline-danger invisible eliminarProd" id="btn_removeLast"
+                                            style="margin-bottom: 2vw;box-shadow: none; "
+                                            onclick="eliminarUltimoProducto();">-</button>
+                                    </div>
+
                                     <button type="submit" class="btn btn-secondary btn-block">Guardar</button>
                                 </form>
                             </div>
@@ -34,4 +63,9 @@
             </div>
         </div>
     </div>
-</div>{% endblock contenido %}
+</div>
+
+{% load static %}
+<script src="{% static '\js\forms.js'%} "></script>
+
+{% endblock contenido %}

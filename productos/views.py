@@ -2,7 +2,7 @@ from re import template
 from django.shortcuts import render,redirect
 from django.template import loader
 from django.http import HttpResponse
-from productos.forms import NuevoProductoForm, ModificarStockForm,NuevoFabricanteForm,EditarProductoForm, EditarFabricanteForm
+from productos.forms import NuevoProductoForm, NuevoFabricanteForm,EditarProductoForm, EditarFabricanteForm,ModificarStockForm,ModificarStockArticulosForm
 from django.contrib import messages
 from django.views.generic import ListView
 from productos.models import Fabricante,Item,Comprobante,ComprobanteProducto
@@ -11,7 +11,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
+from django.forms import formset_factory
+from django.forms.models import modelformset_factory
 
 #Create your views here.
 
@@ -125,13 +126,34 @@ def fabricante_eliminar(request,id_fabr):
     
 @login_required
 def stock(request):
+    if request.method =='POST':
+        print(request.POST)
+        form_stock_enc=ModificarStockForm(request.POST,prefix='encabezado')
+        Form_stock_artic_formset= modelformset_factory(ComprobanteProducto, form=ModificarStockArticulosForm)
+        formsets_stock_artic=Form_stock_artic_formset(request.POST or None)
+
+        if form_stock_enc.is_valid() and formsets_stock_artic.is_valid() :
+            comprobante=Comprobante()
+            comprobante.tipo=form_stock_enc.cleaned_data['tipo']
+            comprobante.fecha=form_stock_enc.cleaned_data['fecha']
+            comprobante.numero=form_stock_enc.cleaned_data['numero']
+            comprobante.save()
+
+            for form in formsets_stock_artic:
+                comprobante.articulos.add(form.cleaned_data['articulo'],through_defaults={'cantidad': form.cleaned_data['cantidad']})
+
+            messages.success(request, 'Modificacion de stock exitosa')
+            form_stock_enc =ModificarStockForm(prefix='encabezado')
+            formsets_stock_artic=formset_factory(ModificarStockArticulosForm,extra=1)    
+        else:
+            messages.warning(request, 'Error en los datos del formulario')
+    elif request.method=='GET':
+        form_stock_enc =ModificarStockForm(prefix='encabezado')
+        formsets_stock_artic=formset_factory(ModificarStockArticulosForm,extra=1)
+
     template = loader.get_template('productos/modificar_stock.html')
-    context={'ModificarStockForm':ModificarStockForm}
+    context={'ModificarStockForm':form_stock_enc,'form':formsets_stock_artic}
     return HttpResponse(template.render(context,request))
-    #template = loader.get_template('productos/modificar_stock.html')
-    #context={'':}
-    #return HttpResponse(template.render(context,request))
-    #return render(request,'productos/modificar_stock.html')
 
 
 class VerComprobantes(PermissionRequiredMixin, ListView):
