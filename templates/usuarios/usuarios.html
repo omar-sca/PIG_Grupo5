@@ -1,0 +1,35 @@
+{% extends 'usuarios\base_usuarios.html' %}
+
+{% block titulo %}Usuarios{% endblock titulo %}
+
+{% block contenido %}
+
+
+
+<div id="tb_quizlist_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h1 class="text-center">Usuarios:</h1>
+
+            <div class="row">
+                {% for user in usuarios %}
+                <div class="col-sm-3 ">
+                    <div class="card card-usuario hover-shadow">
+                        <div class="card-body ">
+                            <h5 class="card-title align-middle text-center">{{user.username}}</h5>
+                            {% load static %}
+                            <a href="{% url 'editar_usuario' user.id %}" class="stretched-link"></a>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% load static %}
+            <a class="a-add-user" href="{% url 'nuevo_usuario' %}" ><img class="img-add-user"  src="{%static '\img\circle-plus.svg' %}" ></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

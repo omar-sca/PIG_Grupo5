@@ -17,17 +17,20 @@ Se dispondrá de tres niveles de usuario, cada nivel tendrá los permisos propio
 ### Tipos de usuarios (con sus correspondientes funcionalidades asociadas):
 - Empleado (Nivel 1):
   - Ver productos.
-  - Ingresar y egresar mercadería
+  - Ingresar y egresar mercadería.
+  - Ver Fabricantes.
+  - Ver comprobantes.
 
 - Supervisor (Nivel 2):
-  -	Ver productos (con opción de edición).
+  -	Ver productos (con opción de edición y baja).
   - Alta producto.
   - Editar productos.
   - Baja producto.
+  -	Ver fabricantes (con opción de edición y baja).
   - Alta fabricante.
   - Editar fabricante.
   - Baja fabricante.
-  - Ver comprobantes.
+
 
 - Administrador (Nivel 3):
   - Ver usuarios.
@@ -37,11 +40,12 @@ Se dispondrá de tres niveles de usuario, cada nivel tendrá los permisos propio
 
 ### Funcionalidades:
 - Ver productos: se listarán en una tabla los productos que están dados de alta en el sistema con su correspondiente nombre, fabricante y stock.
-  - Según el tipo de usuario, en la ultima columna, se mostrará un botón para editar y eliminar el producto.
+  - Según el tipo de usuario, en la última columna, se mostrará un botón para editar y eliminar el producto.
 - Alta producto: perimitirá registrar nuevos productos en el sistema.
 - Editar producto.
 - Baja producto.
-- Ver fabricantes: se listarán en una tabla los fabricantes que están dados de alta en el sistema con su correspondiente nombre, dirección, telefono y email.
+- Ver fabricantes: se listarán en una tabla los fabricantes que están dados de alta en el sistema con su correspondiente nombre, dirección, teléfono y email.
+  - Según el tipo de usuario, en la última columna, se mostrará un botón para editar y eliminar el fabricante.
 - Alta fabricante.
 - Editar fabricante.
 - Baja fabricante: permitirá eliminar fabricantes del sistema. Al eliminar un fabricante, se eliminarán los productos asociados al mismo.
