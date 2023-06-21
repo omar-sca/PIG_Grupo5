@@ -39,7 +39,7 @@
                     {% endif %}
                     <li class="nav-item nav-superior">
                     {% if user.is_authenticated %}
-                    <span class="text-light">Bienvenido, {{ user.username }} | <a class="btn btn-danger btn-sm" href="{% url 'logout' %}">Cerrar sesión</a> </span>
+                    <span class="text-light nav-link">Bienvenido, {{ user.username }} | <a class="btn btn-danger btn-sm" href="{% url 'logout' %}">Cerrar sesión</a> </span>
                     {% else %}
                     {% endif %}
                 </li>
