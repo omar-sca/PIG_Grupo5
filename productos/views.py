@@ -66,10 +66,6 @@ def producto_eliminar(request,id_prod):
     producto.delete()
     return redirect('productos')   
 
-#def fabricantes_mostrar(request):
-#    template = loader.get_template('productos/fabricantes.html')
-#    context={'fabricantes':listaFabricantes}
-#    return HttpResponse(template.render(context,request))
  
 class FabricantesL(PermissionRequiredMixin, ListView):
     permission_required='productos.view_fabricante'
@@ -80,9 +76,6 @@ class FabricantesL(PermissionRequiredMixin, ListView):
 
 @permission_required('change_fabricante')
 def fabricante_editar(request,id_fabr):
-    #template = loader.get_template('productos/fabricante_editar.html')
-    #context={'id_fabricante':id_fabr}
-    #return HttpResponse(template.render(context,request))
     try:
         fabricante =Fabricante.objects.get(pk=id_fabr)
     except Fabricante.DoesNotExist:
