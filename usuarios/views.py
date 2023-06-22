@@ -1,16 +1,14 @@
 from re import template
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from django.shortcuts import render
 from django.conf import settings
-from django.shortcuts import redirect
 from django.views.generic import CreateView, TemplateView,ListView,UpdateView
-from usuarios.forms import Nuevo_usuario_form,Editar_usuario_form
+from usuarios.forms import Nuevo_usuario_form,CustomPasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import permission_required
@@ -40,25 +38,23 @@ class Mostrar(PermissionRequiredMixin,ListView):
 
 
 @permission_required('auth.change_user')
-def editar_usuario(request,id_user):
+def editar_usuario(request, id_user):
     try:
         usuario = User.objects.get(pk=id_user)
     except User.DoesNotExist:
         return render(request, '404_admin.html')
-
-    if (request.method == 'POST'):
-        form_EditUser = Editar_usuario_form(request.POST)
-        # if form_EditUser.is_valid():
-        # revisar: setear password, si el form valida las passwords y como cambiar el grupo al que se asocia el usuario 
-        #     form_EditUser.cleaned_data['grupo'].user_set.add(user)
-        return redirect('usuarios')
+    
+    if request.method == 'POST':
+        form_EditUser = CustomPasswordChangeForm(user=usuario, data=request.POST)
+        if form_EditUser.is_valid():
+            form_EditUser.save()
+            return redirect('mostrar_usuarios')
     else:
-        form_EditUser = Editar_usuario_form()
-        pass
+        form_EditUser = CustomPasswordChangeForm(user=usuario)
 
-    template=loader.get_template('usuarios/editar_usuario.html')
-    context={'id_user':id_user,'form':form_EditUser}
-    return HttpResponse(template.render(context,request))
+    template = 'usuarios/editar_usuario.html'
+    context = {'id_user': id_user, 'form': form_EditUser}
+    return render(request, template, context)
 
 
 @permission_required('auth.delete_user')
