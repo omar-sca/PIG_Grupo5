@@ -52,12 +52,17 @@
     .img-add-user:hover{
     box-shadow: 0 0 2vh rgb(#198754);
     }
-    .a-add-user{
+    .div-add-user{
     display: flex;
     justify-content: center;
     }
 
-    .a-elim-user{
+    .div-elim-user{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     }
+
+    .usuario-grupo{
+    margin-bottom: 0;
+    }
+

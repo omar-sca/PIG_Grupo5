@@ -23,3 +23,6 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         self.fields['new_password1'].label = 'Nueva Clave: '
         self.fields['new_password2'].label = 'Confirme Nueva Clave: '
 
+class cambio_grupo_form(forms.Form):
+    grupo=forms.ModelChoiceField(label='Nivel Nuevo:',queryset=Group.objects.all().order_by('name'))
+

@@ -8,8 +8,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
 from django.views.generic import CreateView, TemplateView,ListView,UpdateView
-from usuarios.forms import Nuevo_usuario_form,CustomPasswordChangeForm
-from django.contrib.auth.models import User
+from usuarios.forms import Nuevo_usuario_form,CustomPasswordChangeForm,cambio_grupo_form
+from django.contrib.auth.models import User,Group
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import permission_required
 
@@ -45,15 +45,30 @@ def editar_usuario(request, id_user):
         return render(request, '404_admin.html')
     
     if request.method == 'POST':
-        form_EditUser = CustomPasswordChangeForm(user=usuario, data=request.POST)
-        if form_EditUser.is_valid():
-            form_EditUser.save()
-            return redirect('mostrar_usuarios')
+        if 'nueva_pass' in request.POST:
+            print("nueva pas")
+            form_EditUser = CustomPasswordChangeForm(user=usuario, data=request.POST)
+            if form_EditUser.is_valid():
+                form_EditUser.save()
+                return redirect('mostrar_usuarios')
+        elif 'nuevo_grupo' in request.POST:
+            form_GrupoNuevo=cambio_grupo_form(request.POST,prefix='nuevoGrupo')
+            if form_GrupoNuevo.is_valid():
+                grupo_actual=usuario.groups.get()
+                grupo_actual.user_set.remove(usuario)
+                form_GrupoNuevo.cleaned_data['grupo'].user_set.add(usuario)
+                print("+-+-+-+-")
+                print(form_GrupoNuevo.cleaned_data['grupo'].name != 'Administrador')
+            if request.user == usuario and form_GrupoNuevo.cleaned_data['grupo'].name != 'Administrador':
+                return redirect('productos')
+            else:
+                return redirect('mostrar_usuarios')
     else:
         form_EditUser = CustomPasswordChangeForm(user=usuario)
+        form_GrupoNuevo=cambio_grupo_form(prefix='nuevoGrupo')
 
     template = 'usuarios/editar_usuario.html'
-    context = {'id_user': id_user, 'form': form_EditUser}
+    context = {'id_user': id_user, 'form': form_EditUser,'formNuevoGrupo':form_GrupoNuevo,'usuario':usuario}
     return render(request, template, context)
 
 

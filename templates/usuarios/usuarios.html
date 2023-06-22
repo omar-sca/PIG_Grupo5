@@ -14,13 +14,15 @@
             <h1 class="text-center">Usuarios:</h1>
 
             <div class="row">
-                {% for user in usuarios %}
+                {% for usuar in usuarios %}
                 <div class="col-sm-3 ">
                     <div class="card card-usuario hover-shadow">
                         <div class="card-body ">
-                            <h5 class="card-title align-middle text-center">{{user.username}}</h5>
+                            <h5 class="card-title align-middle text-center">{{usuar.username}}</h5>
+                            <p></p>
+                            <p class="text-center usuario-grupo">({{ usuar.groups.get }})</p>
                             {% load static %}
-                            <a href="{% url 'editar_usuario' user.id %}" class="stretched-link"></a>
+                            <a href="{% url 'editar_usuario' usuar.id %}" class="stretched-link"></a>
 
                         </div>
                     </div>
@@ -28,7 +30,9 @@
                 {% endfor %}
             </div>
             {% load static %}
-            <a class="a-add-user" href="{% url 'nuevo_usuario' %}" ><img class="img-add-user"  src="{%static '\img\circle-plus.svg' %}" ></a>
+            <div class="div-add-user">
+            <a href="{% url 'nuevo_usuario' %}" ><img class="img-add-user"  src="{%static '\img\circle-plus.svg' %}" ></a>
+            </div>
         </div>
     </div>
 </div>
