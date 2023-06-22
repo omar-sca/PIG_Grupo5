@@ -44,6 +44,9 @@ def editar_usuario(request, id_user):
     except User.DoesNotExist:
         return render(request, '404_admin.html')
     
+    form_EditUser = CustomPasswordChangeForm(user=usuario)
+    form_GrupoNuevo=cambio_grupo_form(prefix='nuevoGrupo')
+    
     if request.method == 'POST':
         if 'nueva_pass' in request.POST:
             print("nueva pas")
@@ -57,15 +60,10 @@ def editar_usuario(request, id_user):
                 grupo_actual=usuario.groups.get()
                 grupo_actual.user_set.remove(usuario)
                 form_GrupoNuevo.cleaned_data['grupo'].user_set.add(usuario)
-                print("+-+-+-+-")
-                print(form_GrupoNuevo.cleaned_data['grupo'].name != 'Administrador')
             if request.user == usuario and form_GrupoNuevo.cleaned_data['grupo'].name != 'Administrador':
                 return redirect('productos')
             else:
-                return redirect('mostrar_usuarios')
-    else:
-        form_EditUser = CustomPasswordChangeForm(user=usuario)
-        form_GrupoNuevo=cambio_grupo_form(prefix='nuevoGrupo')
+                return redirect('mostrar_usuarios')        
 
     template = 'usuarios/editar_usuario.html'
     context = {'id_user': id_user, 'form': form_EditUser,'formNuevoGrupo':form_GrupoNuevo,'usuario':usuario}
