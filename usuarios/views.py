@@ -49,7 +49,6 @@ def editar_usuario(request, id_user):
     
     if request.method == 'POST':
         if 'nueva_pass' in request.POST:
-            print("nueva pas")
             form_EditUser = CustomPasswordChangeForm(user=usuario, data=request.POST)
             if form_EditUser.is_valid():
                 form_EditUser.save()
