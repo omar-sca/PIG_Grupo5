@@ -8,7 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
 from django.views.generic import CreateView, TemplateView,ListView,UpdateView
-from usuarios.forms import Nuevo_usuario_form,CustomPasswordChangeForm,cambio_grupo_form
+from usuarios.forms import NuevoUsuarioForm,CustomPasswordChangeForm,CambioGrupoForm
 from django.contrib.auth.models import User,Group
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import permission_required
@@ -16,10 +16,10 @@ from django.contrib.auth.decorators import permission_required
 # Create your views here.
 
 
-class Nuevo_usuario(PermissionRequiredMixin,CreateView):
+class NuevoUsuario(PermissionRequiredMixin,CreateView):
     permission_required='auth.add_user'
     model = User
-    form_class = Nuevo_usuario_form
+    form_class = NuevoUsuarioForm
     template_name="usuarios/nuevo_usuario.html"
     context_object_name='form'
 
@@ -45,7 +45,7 @@ def editar_usuario(request, id_user):
         return render(request, '404_admin.html')
     
     form_EditUser = CustomPasswordChangeForm(user=usuario)
-    form_GrupoNuevo=cambio_grupo_form(prefix='nuevoGrupo')
+    form_GrupoNuevo=CambioGrupoForm(prefix='nuevoGrupo')
     
     if request.method == 'POST':
         if 'nueva_pass' in request.POST:
@@ -54,7 +54,7 @@ def editar_usuario(request, id_user):
                 form_EditUser.save()
                 return redirect('mostrar_usuarios')
         elif 'nuevo_grupo' in request.POST:
-            form_GrupoNuevo=cambio_grupo_form(request.POST,prefix='nuevoGrupo')
+            form_GrupoNuevo=CambioGrupoForm(request.POST,prefix='nuevoGrupo')
             if form_GrupoNuevo.is_valid():
                 grupo_actual=usuario.groups.get()
                 grupo_actual.user_set.remove(usuario)

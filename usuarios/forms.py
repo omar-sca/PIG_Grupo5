@@ -4,7 +4,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User,Group
 
 
-class Nuevo_usuario_form(UserCreationForm):
+class NuevoUsuarioForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','password1','password2',]
@@ -23,6 +23,6 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         self.fields['new_password1'].label = 'Nueva Clave: '
         self.fields['new_password2'].label = 'Confirme Nueva Clave: '
 
-class cambio_grupo_form(forms.Form):
+class CambioGrupoForm(forms.Form):
     grupo=forms.ModelChoiceField(label='Nivel Nuevo:',queryset=Group.objects.all().order_by('name'))
 
